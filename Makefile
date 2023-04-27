@@ -4,6 +4,8 @@ CC = cc
 
 CFLAG = -Wall -Wextra -Werror
 
+MLXFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
+
 INC = -I./includes/
 
 LIB_FLAG = -Llib -lft
@@ -22,17 +24,18 @@ all : $(NAME)
 
 $(NAME): $(OBJS)
 	@make -C lib
-	@$(CC) $(CFLAG) $^ $(LIB_FLAG) $(R_FLAG) -o $@
+	@make -C mlx
+	@$(CC) $(MLXFLAG) $^ $(LIB_FLAG) $(R_FLAG) -o $@
 	@printf	"Ready for Cub3d\n"
 
 clean :
 	@make clean -C lib
+	@make clean -C mlx
 	@$(RM) $(OBJS)
 	@printf	"Run to Clean\n"
 
-fclean :
+fclean : clean
 	@make fclean -C lib
-	@$(RM) $(OBJS)
 	@$(RM) $(NAME)
 	@printf	"Run to fClean\n"
 
