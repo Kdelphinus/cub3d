@@ -25,17 +25,20 @@ all : $(NAME)
 $(NAME): $(OBJS)
 	@make -C lib
 	@make -C mlx
+	@make -C gnl
 	@$(CC) $(MLXFLAG) $^ $(LIB_FLAG) $(R_FLAG) -o $@
 	@printf	"Ready for Cub3d\n"
 
 clean :
 	@make clean -C lib
 	@make clean -C mlx
+	@make clean -C gnl
 	@$(RM) $(OBJS)
 	@printf	"Run to Clean\n"
 
 fclean : clean
 	@make fclean -C lib
+	@make fclean -C gnl
 	@$(RM) $(NAME)
 	@printf	"Run to fClean\n"
 

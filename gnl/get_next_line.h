@@ -1,34 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   cub3d.h                                            :+:      :+:    :+:   */
+/*   get_next_line.h                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: jaekkang <jaekkang@student.42.kr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/27 11:16:09 by jaekkang          #+#    #+#             */
-/*   Updated: 2023/04/27 14:03:29 by jaekkang         ###   ########.fr       */
+/*   Created: 2022/07/21 17:12:40 by jaekkang          #+#    #+#             */
+/*   Updated: 2022/10/19 16:12:16 by jaekkang         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CUB3D_H
-# define CUB3D_H
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
 
-# include "../mlx/mlx.h"
-# include "../lib/libft.h"
-# include "../gnl/get_next_line.h"
-# include <stdio.h>
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 1
+# endif
 
-typedef struct s_map
-{
-	void	*map_ptr;
-	char	*name;
-}	t_map;
+typedef struct s_info {
+	char	*buf;
+	char	*save;
+	char	*line;
+	char	*ret;
+	int		fd;
+	int		idx;
+}				t_info;
 
-typedef struct s_game
-{
-	void	*mlx;
-	void	*win;
-	t_map	map;
-}	t_game;
+char	*get_next_line(int fd);
 
 #endif
