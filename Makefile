@@ -10,7 +10,11 @@ INC = -I./includes/
 
 LIB_FLAG = -Llib -lft
 
+GNL_FLAG = -Lgnl -lgnl
+
 SRC =	main.c \
+		parsing/parsing.c \
+		utiles/error.c
 
 SRC_DIR = ./srcs/
 
@@ -26,7 +30,7 @@ $(NAME): $(OBJS)
 	@make -C lib
 	@make -C mlx
 	@make -C gnl
-	@$(CC) $(MLXFLAG) $^ $(LIB_FLAG) $(R_FLAG) -o $@
+	@$(CC) $(MLXFLAG) $^ $(LIB_FLAG) $(GNL_FLAG) $(R_FLAG) -o $@
 	@printf	"Ready for Cub3d\n"
 
 clean :
