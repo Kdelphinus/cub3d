@@ -1,6 +1,4 @@
-
 #include "../../includes/cub3d.h"
-
 
 static void	read_file(int fd, t_game_info *info)
 {

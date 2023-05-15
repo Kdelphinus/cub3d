@@ -1,29 +1,28 @@
 #include "../../includes/cub3d.h"
 
-void add_texture_node(t_texture* list, t_texture* new_node)
+void	add_texture_node(t_texture *list, t_texture *new_node)
 {
-    t_texture* cur;
-	
+	t_texture	*cur;
+
 	cur = list;
-    while (cur->next != NULL) {
-        cur = cur->next;
-    }
-    cur->next = new_node;
-    new_node->next = NULL;
+	while (cur->next != NULL)
+		cur = cur->next;
+	cur->next = new_node;
+	new_node->next = NULL;
 }
 
-t_texture    *new_texture(t_game_info *info, char *img_path)
+t_texture	*new_texture(t_game_info *info, char *img_path)
 {
-	t_texture* ret;
-	
-	ret = (t_texture*)malloc(sizeof(t_texture));
-    ret->dir = 0,
-    ret->img_w = 64;
-    ret->img_h = 64;
-    ret->img = mlx_xpm_file_to_image(info->mlx, \
+	t_texture	*ret;
+
+	ret = (t_texture *)malloc(sizeof(t_texture));
+	ret->dir = 0;
+	ret->img_w = 64;
+	ret->img_h = 64;
+	ret->img = mlx_xpm_file_to_image(info->mlx, \
 			img_path, &ret->img_w, &ret->img_h);
-    ret->cnt = 0;
-    ret->next = NULL;
+	ret->cnt = 0;
+	ret->next = NULL;
 	return (ret);
 }
 
