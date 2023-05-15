@@ -14,6 +14,10 @@ GNL_FLAG = -Lgnl -lgnl
 
 SRC =	main.c \
 		parsing/parsing.c \
+		parsing/init.c \
+		parsing/check.c \
+		parsing/check_dir.c \
+		utiles/print_info.c \
 		utiles/error.c
 
 SRC_DIR = ./srcs/
@@ -26,11 +30,11 @@ all : $(NAME)
 .c.o:
 	@$(CC) $(CFLAG) $(INC) $(R_INC) -c $< -o $@
 
-$(NAME): $(OBJS)
+$(NAME): $(OBJS) ./includes/cub3d.h
 	@make -C lib
 	@make -C mlx
 	@make -C gnl
-	@$(CC) $(MLXFLAG) $^ $(LIB_FLAG) $(GNL_FLAG) $(R_FLAG) -o $@
+	@$(CC) $(MLXFLAG) $(OBJS) $(LIB_FLAG) $(GNL_FLAG) $(R_FLAG) -o $@
 	@printf	"Ready for Cub3d\n"
 
 clean :

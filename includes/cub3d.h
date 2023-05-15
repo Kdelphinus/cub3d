@@ -1,60 +1,65 @@
 
 #ifndef CUB3D_H
-# define CUB3D_H
+#define CUB3D_H
 
-# include "../mlx/mlx.h"
-# include "../lib/libft.h"
-# include "../gnl/get_next_line.h"
-# include <stdio.h>
-# include <unistd.h>
-# include <math.h>
-# include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <fcntl.h>
+#include <math.h>
 
-typedef enum e_direction {
-	NO = 0,
+#include "../gnl/get_next_line.h"
+#include "../lib/libft.h"
+#include "../mlx/mlx.h"
+
+#define FAILE 0
+#define SUCCESS 1
+
+#define FALSE 0
+#define TRUE 1
+
+typedef enum e_dir {
+	NO,
 	SO,
 	WE,
 	EA
-}		t_dir;
+}   t_dir;
 
-typedef enum e_type {
-	FAILE,
-	SUCCESS
-}	t_type;
-
-typedef struct s_check
-{
-	int	no_count;
-	int	so_count;
-	int	we_count;
-	int	ea_count;
-	int	f_count;
-	int	c_count;
-}		t_check;
+typedef struct s_texture {
+    enum e_dir dir;
+    void *img;
+    int img_w;
+    int img_h;
+    int cnt;
+    struct s_texture *next;
+} t_texture;
 
 typedef struct s_map_data {
-	char	**map;
-	void	*no_image;
-	void	*so_image;
-	void	*we_image;
-	void	*ea_image;
-	int		f_rgb;
-	int		c_rgb;
-	int		image_w;
-	int		image_h;
-}				t_map_data;
+    char **map;
+    int flr_color;
+    int ceil_color;
+    int flr_count;
+    int ceil_count;
+    t_texture *textures;
+} t_map_data;
 
-typedef struct s_game_info
-{
-	void		*mlx;
-	void		*win;
-	int			f_color;
-	int			c_color;
-	t_map_data	*map_data;
-	t_check		*check;
-}		t_game_info;
+typedef struct s_game_info {
+    void *mlx;
+    void *win;
+    t_map_data *map_data;
+} t_game_info;
 
-void	parsing(t_game_info *info, char *map_file);
-void	print_err_exit(void);
+void parsing(t_game_info *info, char *map_file);
+void print_err_exit(void);
+void add_texture_node(t_texture* list, t_texture* new_node);
+void	check_texture(char *line, t_game_info *info);
+void	info_init(t_game_info *info);
+void	check_extension(char *file_name);
+int check_no(char *img_path, t_game_info *info);
+int check_so(char *img_path, t_game_info *info);
+int check_we(char *img_path, t_game_info *info);
+int check_ea(char *img_path, t_game_info *info);
+t_texture    *new_texture(t_game_info *info, char* img_path);
+void print_game_info(const t_game_info *info);
 
 #endif
