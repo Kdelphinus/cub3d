@@ -12,6 +12,10 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 		line = get_next_line(fd);
 		check_texture(line, info);
 	}
+	if (info->map_data->ceil_color == info->map_data->flr_color)
+	{
+		print_err_exit();
+	}
 	while (line != NULL)
 	{
 		add_mapping_node(m_head, new_mapping(line, obj));
