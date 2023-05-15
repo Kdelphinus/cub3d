@@ -1,6 +1,5 @@
 #include "../../includes/cub3d.h"
 
-
 void	add_mapping_node(t_mapping *list, t_mapping *new_node)
 {
 	t_mapping	*cur;
@@ -18,7 +17,7 @@ static int	check_obj(char *line, t_obj *obj)
 
 	i = -1;
 	if (line[0] == '\0')
-		return (-1); // 일단 eof면 -1;
+		return (-1);// 일단 eof면 -1;
 	while (line[++i] != '\n')
 	{
 		if (line[i] == 'N' && obj->n_cnt == 0)
@@ -35,12 +34,12 @@ static int	check_obj(char *line, t_obj *obj)
 			print_err_exit();
 	}
 	++obj->h;
-	return	(i);
+	return (i);
 }
 
 t_mapping	*new_mapping(char *line, t_obj *obj)
 {
-	t_mapping 	*ret;
+	t_mapping	*ret;
 
 	ret = (t_mapping *)malloc(sizeof(t_mapping));
 	ret->line = line;

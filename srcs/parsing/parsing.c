@@ -25,7 +25,7 @@ void	parsing(t_game_info *info, char *file_name)
 	t_obj	*obj;
 
 	check_extension(file_name);
-	obj = malloc(sizeof(t_obj));
+	obj = (t_obj *)malloc(sizeof(t_obj));
 	info_init(info, obj);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)

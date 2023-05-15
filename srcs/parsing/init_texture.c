@@ -11,7 +11,7 @@ void	add_texture_node(t_texture *list, t_texture *new_node)
 	new_node->next = NULL;
 }
 
-void    texture_init(t_game_info *info)
+void	texture_init(t_game_info *info)
 {
 	int			i;
 	t_texture	*head;
@@ -20,9 +20,7 @@ void    texture_init(t_game_info *info)
 	head = new_texture(i);
 	info->map_data->textures = head;
 	while (++i < 4)
-	{
 		add_texture_node(info->map_data->textures, new_texture(i));
-	}
 }
 
 t_texture	*new_texture(int i)

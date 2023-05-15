@@ -13,7 +13,7 @@ void	allocate_no(char **data, t_game_info *info)
 				print_err_exit();// 이미 NO에 대한 값이 있는 경우 처리를 중단
 			++cur->cnt;
 			cur->img = mlx_xpm_file_to_image(info->mlx, data[1], \
-            &cur->img_w, &cur->img_h);
+			&cur->img_w, &cur->img_h);
 			return ;
 		}
 		cur = cur->next;
