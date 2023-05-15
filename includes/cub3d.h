@@ -46,6 +46,8 @@ typedef struct s_map_data {
 typedef struct s_game_info {
 	void		*mlx;
 	void		*win;
+	//int		p_dir;
+	//struct	t_vector -> 실행에서 사용될 벡터 구조체
 	t_map_data	*map_data;
 }	t_game_info;
 

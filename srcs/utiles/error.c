@@ -3,5 +3,5 @@
 void	print_err_exit(void)
 {
 	printf("error\n");
-	exit(0);
+	exit(FAILE);
 }

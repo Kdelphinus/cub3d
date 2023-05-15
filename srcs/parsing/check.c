@@ -9,7 +9,7 @@ void	check_extension(char *file_name)
 		|| file_name[len - 1] != 'u' || file_name[len] != 'b' )
 	{
 		printf("Error\nThis is not a valid file name.\n");
-		exit(FAILE);
+		print_err_exit();
 	}
 }
 
@@ -26,8 +26,8 @@ void	check_texture(char *line, t_game_info *info)
 			return ;
 		print_err_exit();
 	}
-	// tmp[1][ft_strlen(tmp[1]) - 1] = '\0';
-	tmp[1] = ft_strtrim(tmp[1], "\n");
+	tmp[1][ft_strlen(tmp[1]) - 1] = '\0';
+	// tmp[1] = ft_strtrim(tmp[1], "\n");
 	if (!ft_strcmp("NO", tmp[0]) || !check_no(tmp[1], info))
 		print_err_exit();
 	else if (!ft_strcmp("SO", tmp[0]) || !check_so(tmp[1], info))
