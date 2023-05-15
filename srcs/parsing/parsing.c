@@ -1,27 +1,37 @@
 #include "../../includes/cub3d.h"
 
-static void	read_file(int fd, t_game_info *info)
+static void	read_file(int fd, t_game_info *info, t_obj *obj)
 {
-	char	*line;
+	t_mapping	*m_head;
+	char		*line;
 
-	while (TRUE)
+	m_head = malloc(sizeof(t_mapping));
+	m_head->next = NULL;
+	while (info->stop_flag != TRUE)
 	{
 		line = get_next_line(fd);
 		check_texture(line, info);
+	}
+	while (line != NULL)
+	{
+		add_mapping_node(m_head, new_mapping(line, obj));
+		line = get_next_line(fd);
 	}
 }
 
 void	parsing(t_game_info *info, char *file_name)
 {
-	int	fd;
+	int		fd;
+	t_obj	*obj;
 
 	check_extension(file_name);
-	info_init(info);
+	obj = malloc(sizeof(t_obj));
+	info_init(info, obj);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
 		printf("Error\nThe file name or data is incorrect.\n");
 		exit(fd);
 	}
-	read_file(fd, info);
+	read_file(fd, info, obj);
 }

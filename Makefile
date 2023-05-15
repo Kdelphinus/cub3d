@@ -2,7 +2,7 @@ NAME = cub3d
 
 CC = cc
 
-CFLAG = -Wall -Wextra -Werror
+CFLAG = -Wall -Wextra -Werror -g
 
 MLXFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
@@ -14,7 +14,9 @@ GNL_FLAG = -Lgnl -lgnl
 
 SRC =	main.c \
 		parsing/parsing.c \
-		parsing/init.c \
+		parsing/init_info.c \
+		parsing/init_texture.c \
+		parsing/init_mapping.c \
 		parsing/check.c \
 		parsing/check_dir.c \
 		utiles/print_info.c \

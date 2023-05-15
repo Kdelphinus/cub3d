@@ -1,93 +1,81 @@
 #include "../../includes/cub3d.h"
 
-int	check_no(char *img_path, t_game_info *info)
+void	allocate_no(char **data, t_game_info *info)
 {
 	t_texture	*cur;
-	t_texture	*new;
 
 	cur = info->map_data->textures;
-	new = 0;
 	while (cur != NULL)
 	{
 		if (cur->dir == NO)
-			print_err_exit();// 이미 NO에 대한 값이 있는 경우 처리를 중단
-		if (cur->next == NULL)
 		{
-			new = new_texture(info, img_path);
-			new->dir = NO;
-			add_texture_node(info->map_data->textures, new);
-			return (0); // 새로운 노드를 추가한 후 처리를 중단
+			if (cur->cnt > 0)
+				print_err_exit();// 이미 NO에 대한 값이 있는 경우 처리를 중단
+			++cur->cnt;
+			cur->img = mlx_xpm_file_to_image(info->mlx, data[1], \
+            &cur->img_w, &cur->img_h);
+			return ;
 		}
 		cur = cur->next;
 	}
-	return (0);
 }
 
-int	check_so(char *img_path, t_game_info *info)
+void	allocate_so(char **data, t_game_info *info)
 {
 	t_texture	*cur;
-	t_texture	*new;
 
 	cur = info->map_data->textures;
-	new = 0;
 	while (cur != NULL)
 	{
 		if (cur->dir == SO)
-			print_err_exit();
-		if (cur->next == NULL)
 		{
-			new = new_texture(info, img_path);
-			new->dir = SO;
-			add_texture_node(info->map_data->textures, new);
-			return (0);
+			if (cur->cnt > 0)
+				print_err_exit();// 이미 NO에 대한 값이 있는 경우 처리를 중단
+			++cur->cnt;
+			cur->img = mlx_xpm_file_to_image(info->mlx, data[1], \
+			&cur->img_w, &cur->img_h);
+			return ;
 		}
 		cur = cur->next;
 	}
-	return (0);
 }
 
-int	check_we(char *img_path, t_game_info *info)
+void	allocate_we(char **data, t_game_info *info)
 {
 	t_texture	*cur;
-	t_texture	*new;
 
 	cur = info->map_data->textures;
-	new = 0;
 	while (cur != NULL)
 	{
 		if (cur->dir == WE)
-			print_err_exit();
-		if (cur->next == NULL)
 		{
-			new = new_texture(info, img_path);
-			new->dir = WE;
-			add_texture_node(info->map_data->textures, new);
-			return (0);
+			if (cur->cnt > 0)
+				print_err_exit();// 이미 NO에 대한 값이 있는 경우 처리를 중단
+			++cur->cnt;
+			cur->img = mlx_xpm_file_to_image(info->mlx, data[1], \
+			&cur->img_w, &cur->img_h);
+			return ;
 		}
 		cur = cur->next;
 	}
-	return (0);
 }
 
-int	check_ea(char *img_path, t_game_info *info)
+void	allocate_ea(char **data, t_game_info *info)
 {
 	t_texture	*cur;
-	t_texture	*new;
 
 	cur = info->map_data->textures;
-	new = 0;
 	while (cur != NULL)
 	{
 		if (cur->dir == EA)
-			print_err_exit();
-		if (cur->next == NULL)
 		{
-			new = new_texture(info, img_path);
-			new->dir = EA;
-			add_texture_node(info->map_data->textures, new);
-			return (0);
+			if (cur->cnt > 0)
+				print_err_exit();// 이미 NO에 대한 값이 있는 경우 처리를 중단
+			++cur->cnt;
+			cur->img = mlx_xpm_file_to_image(info->mlx, data[1], \
+			&cur->img_w, &cur->img_h);
+			return ;
 		}
 		cur = cur->next;
 	}
-	return (0);
 }

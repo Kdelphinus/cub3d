@@ -16,6 +16,7 @@ void	check_extension(char *file_name)
 void	check_texture(char *line, t_game_info *info)
 {
 	char	**tmp;
+	char	**rgb;
 
 	tmp = ft_split(line, ' ');
 	if (tmp == NULL)
@@ -24,40 +25,37 @@ void	check_texture(char *line, t_game_info *info)
 	{
 		if (tmp[0][0] == '\n')
 			return ;
-		print_err_exit();
+		info->stop_flag = TRUE;
+		return ;
 	}
 	tmp[1][ft_strlen(tmp[1]) - 1] = '\0';
-	// tmp[1] = ft_strtrim(tmp[1], "\n");
-	if (!ft_strcmp("NO", tmp[0]) || !check_no(tmp[1], info))
-		print_err_exit();
-	else if (!ft_strcmp("SO", tmp[0]) || !check_so(tmp[1], info))
-		print_err_exit();
-	else if (!ft_strcmp("WE", tmp[0]) || !check_we(tmp[1], info))
-		print_err_exit();
-	else if (!ft_strcmp("EA", tmp[0]) || !check_ea(tmp[1], info))
-		print_err_exit();
+	if (!ft_strcmp(tmp[0], "NO"))
+		allocate_no(tmp, info);
+	else if (!ft_strcmp((tmp[0]), "SO"))
+		allocate_so(tmp, info);
+	else if (!ft_strcmp((tmp[0]), "WE"))
+		allocate_we(tmp, info);
+	else if (!ft_strcmp((tmp[0]), "EA"))
+		allocate_ea(tmp, info);
 	else if (!ft_strcmp("F", tmp[0]))
 	{
-		printf("check F keyword in map file and pass\n");
-		// if (info->check->f_count != 0)
-		// {
-		// 	print_err_exit();
-		// }
-		// rgb = ft_split(tmp[1], ',');
-		// t = ft_atoi(rgb[0]);
-		// info->map_data->f_rgb = t;
-		// info->map_data->f_rgb << 4;
-		// ++info->check->f_count;
+		if (info->map_data->flr_count != 0)
+			print_err_exit();
+		++info->map_data->flr_count;
+		rgb = ft_split(tmp[1], ',');
+		info->map_data->flr_color = ft_atoi(rgb[0]) << 16 | ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]);
+		//rgb free 해줘야 함
 	}
 	else if (!ft_strcmp("C", tmp[0]))
 	{
-		printf("check C keyword in map file and pass\n");
-		// if (info->check->c_count != 0)
-		// {
-		// 	print_err_exit();
-		// }
-		// ++info->check->c_count;
+		if (info->map_data->ceil_count != 0)
+			print_err_exit();
+		++info->map_data->ceil_count;
+		rgb = ft_split(tmp[1], ',');
+		info->map_data->ceil_color = ft_atoi(rgb[0]) << 16 | ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]);
 	}
 	else
-		print_err_exit();
+	{
+		info->stop_flag = TRUE;
+	}
 }
