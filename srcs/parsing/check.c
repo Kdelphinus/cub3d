@@ -9,55 +9,51 @@ void	check_extension(char *file_name)
 		|| file_name[len - 1] != 'u' || file_name[len] != 'b' )
 	{
 		printf("Error\nThis is not a valid file name.\n");
-		exit(FAILE);
+		print_err_exit();
 	}
 }
 
 void	check_texture(char *line, t_game_info *info)
 {
 	char	**tmp;
+	int 	i;
 
+	i = 0;
 	tmp = ft_split(line, ' ');
-	if (tmp == NULL)
-		print_err_exit();
-	if (ft_strlen(tmp[0]) > 3 || tmp[1] == NULL || tmp[2] != NULL)
+	if (!check_tmp_invalid(info, tmp))
 	{
 		if (tmp[0][0] == '\n')
-			return ;
-		print_err_exit();
+		{
+			free(line);
+		}
+		while (tmp[i] != NULL)
+		{
+			free(tmp[i]);
+			++i;
+		}
+		free(tmp);
+		return ;
 	}
-	// tmp[1][ft_strlen(tmp[1]) - 1] = '\0';
-	tmp[1] = ft_strtrim(tmp[1], "\n");
-	if (!ft_strcmp("NO", tmp[0]) || !check_no(tmp[1], info))
-		print_err_exit();
-	else if (!ft_strcmp("SO", tmp[0]) || !check_so(tmp[1], info))
-		print_err_exit();
-	else if (!ft_strcmp("WE", tmp[0]) || !check_we(tmp[1], info))
-		print_err_exit();
-	else if (!ft_strcmp("EA", tmp[0]) || !check_ea(tmp[1], info))
-		print_err_exit();
-	else if (!ft_strcmp("F", tmp[0]))
-	{
-		printf("check F keyword in map file and pass\n");
-		// if (info->check->f_count != 0)
-		// {
-		// 	print_err_exit();
-		// }
-		// rgb = ft_split(tmp[1], ',');
-		// t = ft_atoi(rgb[0]);
-		// info->map_data->f_rgb = t;
-		// info->map_data->f_rgb << 4;
-		// ++info->check->f_count;
-	}
-	else if (!ft_strcmp("C", tmp[0]))
-	{
-		printf("check C keyword in map file and pass\n");
-		// if (info->check->c_count != 0)
-		// {
-		// 	print_err_exit();
-		// }
-		// ++info->check->c_count;
-	}
+	tmp[1][ft_strlen(tmp[1]) - 1] = '\0';
+	if (!ft_strcmp(tmp[0], "NO"))
+		allocate_dir(tmp, info, NO);
+	else if (!ft_strcmp(tmp[0], "SO"))
+		allocate_dir(tmp, info, SO);
+	else if (!ft_strcmp(tmp[0], "WE"))
+		allocate_dir(tmp, info, WE);
+	else if (!ft_strcmp(tmp[0], "EA"))
+		allocate_dir(tmp, info, EA);
+	else if (!ft_strcmp(tmp[0], "F"))
+		allocate_flr(tmp, info);
+	else if (!ft_strcmp(tmp[0], "C"))
+		allocate_ceil(tmp, info);
 	else
-		print_err_exit();
+		info->stop_flag = TRUE;
+	while (tmp[i] != NULL)
+	{
+		free(tmp[i]);
+		++i;
+	}
+	free(tmp);
+	free(line);
 }
