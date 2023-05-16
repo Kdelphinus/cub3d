@@ -16,10 +16,24 @@ void	check_extension(char *file_name)
 void	check_texture(char *line, t_game_info *info)
 {
 	char	**tmp;
+	int 	i;
 
+	i = 0;
 	tmp = ft_split(line, ' ');
-	if (!check_tmp_invalid(info, tmp))
+	if (!check_tmp_invalid(info, tmp)) //여기서 해제가 필요한듯?
+	{
+		if (tmp[0][0] == '\n')
+		{
+			free(line);
+		}
+		while (tmp[i] != NULL)
+		{
+			free(tmp[i]);
+			++i;
+		}
+		free(tmp);
 		return ;
+	}
 	tmp[1][ft_strlen(tmp[1]) - 1] = '\0';
 	if (!ft_strcmp(tmp[0], "NO"))
 		allocate_no(tmp, info);
@@ -35,4 +49,11 @@ void	check_texture(char *line, t_game_info *info)
 		allocate_ceil(tmp, info);
 	else
 		info->stop_flag = TRUE;
+	while (tmp[i] != NULL)
+	{
+		free(tmp[i]);
+		++i;
+	}
+	free(tmp);
+	free(line);
 }

@@ -16,10 +16,10 @@ static int	check_obj(char *line, t_obj *obj)
 	int	i;
 
 	i = -1;
-	if (line[0] == '\0')
-		return (-1);// 일단 eof면 -1;
 	while (line[++i] != '\n')
 	{
+		if (line[i] == '\0')
+			break ;
 		if (line[i] == 'N' && obj->n_cnt == 0)
 			++obj->n_cnt;
 		else if (line[i] == 'E' && obj->e_cnt == 0)
@@ -44,6 +44,8 @@ t_mapping	*new_mapping(char *line, t_obj *obj)
 	ret = (t_mapping *)malloc(sizeof(t_mapping));
 	ret->line = line;
 	ret->line_len = check_obj(line, obj);
+	if (obj->w < ret->line_len)
+		obj->w = ret->line_len;
 	ret->next = NULL;
 	return (ret);
 }

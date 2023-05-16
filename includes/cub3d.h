@@ -30,6 +30,7 @@ typedef struct s_obj
 	int	e_cnt;
 	int	s_cnt;
 	int	w_cnt;
+	int	w;
 	int	h;
 }	t_obj;
 

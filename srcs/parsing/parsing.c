@@ -3,8 +3,11 @@
 static void	read_file(int fd, t_game_info *info, t_obj *obj)
 {
 	t_mapping	*m_head;
+	t_mapping	*tmp;
 	char		*line;
+	int 		i;
 
+	i = 0;
 	m_head = malloc(sizeof(t_mapping));
 	m_head->next = NULL;
 	while (info->stop_flag != TRUE)
@@ -12,14 +15,34 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 		line = get_next_line(fd);
 		check_texture(line, info);
 	}
-	if (info->map_data->ceil_color == info->map_data->flr_color)
-	{
-		print_err_exit();
-	}
 	while (line != NULL)
 	{
 		add_mapping_node(m_head, new_mapping(line, obj));
 		line = get_next_line(fd);
+	}
+	tmp = m_head->next;
+	info->map_data->map = malloc(sizeof(char*) * obj->h);
+	while (i < obj->h)
+	{
+		info->map_data->map[i] = malloc(sizeof(char) * obj->w);
+		ft_strlcpy(info->map_data->map[i], tmp->line, tmp->line_len + 1);
+		while (obj->w > tmp->line_len)
+		{
+			info->map_data->map[i][tmp->line_len] = ' ';
+			++tmp->line_len;
+		}
+		tmp = tmp->next;
+		++i;
+	}
+	tmp = m_head->next;
+	free(m_head);
+	m_head = tmp;
+	while (m_head != NULL)
+	{
+		free(m_head->line);
+		tmp = m_head->next;
+		free(m_head);
+		m_head = tmp;
 	}
 }
 
@@ -38,4 +61,5 @@ void	parsing(t_game_info *info, char *file_name)
 		exit(fd);
 	}
 	read_file(fd, info, obj);
+	free(obj);
 }

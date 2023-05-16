@@ -4,8 +4,8 @@ CC = cc
 
 CFLAG = -Wall -Wextra -Werror -g
 
-MLXFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
 
+MLXFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
 INC = -I./includes/
 
 LIB_FLAG = -Llib -lft

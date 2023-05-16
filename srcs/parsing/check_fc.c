@@ -17,24 +17,40 @@ int	check_tmp_invalid(t_game_info *info, char **tmp)
 void	allocate_flr(char **data, t_game_info *info)
 {
 	char	**rgb;
+	int 	i;
 
+	i = 0;
 	if (info->map_data->flr_count != 0)
 		print_err_exit();
 	++info->map_data->flr_count;
 	rgb = ft_split(data[1], ',');
 	info->map_data->flr_color = ft_atoi(rgb[0]) << 16
 		| ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]);
+	while(rgb[i] != NULL)
+	{
+		free(rgb[i]);
+		++i;
+	}
+	free(rgb);
 	//rgb free 해줘야 함
 }
 
 void	allocate_ceil(char **data, t_game_info *info)
 {
 	char	**rgb;
+	int 	i;
 
+	i = 0;
 	if (info->map_data->ceil_count != 0)
 		print_err_exit();
 	++info->map_data->ceil_count;
 	rgb = ft_split(data[1], ',');
 	info->map_data->ceil_color = ft_atoi(rgb[0]) << 16
 		| ft_atoi(rgb[1]) << 8 | ft_atoi(rgb[2]);
+	while(rgb[i] != NULL)
+	{
+		free(rgb[i]);
+		++i;
+	}
+	free(rgb);
 }

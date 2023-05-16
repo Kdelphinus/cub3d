@@ -17,5 +17,6 @@ void	info_init(t_game_info *info, t_obj *obj)
 	obj->e_cnt = 0;
 	obj->s_cnt = 0;
 	obj->w_cnt = 0;
+	obj->w = 0;
 	obj->h = 0;
 }
