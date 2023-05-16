@@ -8,8 +8,7 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 	int 		i;
 
 	i = 0;
-	m_head = malloc(sizeof(t_mapping));
-	m_head->next = NULL;
+	m_head = NULL;
 	while (info->stop_flag != TRUE)
 	{
 		line = get_next_line(fd);
@@ -17,10 +16,10 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 	}
 	while (line != NULL)
 	{
-		add_mapping_node(m_head, new_mapping(line, obj));
+		add_mapping_node(&m_head, new_mapping(line, obj));
 		line = get_next_line(fd);
 	}
-	tmp = m_head->next;
+	tmp = m_head;
 	info->map_data->map = malloc(sizeof(char*) * obj->h);
 	while (i < obj->h)
 	{
@@ -34,9 +33,6 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 		tmp = tmp->next;
 		++i;
 	}
-	tmp = m_head->next;
-	free(m_head);
-	m_head = tmp;
 	while (m_head != NULL)
 	{
 		free(m_head->line);

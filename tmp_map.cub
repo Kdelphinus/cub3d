@@ -1,7 +1,7 @@
 EA ./asset/ea.xpm
+NO ./asset/no.xpm
 SO ./asset/so.xpm
 WE ./asset/we.xpm
-NO ./asset/no.xpm
 
 F 220,100,0
 C 225,30,0

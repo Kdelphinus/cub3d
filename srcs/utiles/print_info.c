@@ -17,7 +17,7 @@ void	print_game_info(const t_game_info *info)
 	printf("   - flr_count: %d\n", info->map_data->flr_count);
 	printf("   - ceil_count: %d\n", info->map_data->ceil_count);
 	printf("   - textures:\n");
-	t_texture *texture = info->map_data->textures;
+/*	t_texture *texture = info->map_data->textures;
 	while (texture != NULL)
 	{
 		printf("	 - dir: %d\n", texture->dir);
@@ -26,5 +26,5 @@ void	print_game_info(const t_game_info *info)
 		printf("	   img_h: %d\n", texture->img_h);
 		printf("	   cnt: %d\n", texture->cnt);
 		texture = texture->next;
-	}
+	}*/
 }

@@ -20,7 +20,7 @@ void	check_texture(char *line, t_game_info *info)
 
 	i = 0;
 	tmp = ft_split(line, ' ');
-	if (!check_tmp_invalid(info, tmp)) //여기서 해제가 필요한듯?
+	if (!check_tmp_invalid(info, tmp))
 	{
 		if (tmp[0][0] == '\n')
 		{
@@ -36,13 +36,13 @@ void	check_texture(char *line, t_game_info *info)
 	}
 	tmp[1][ft_strlen(tmp[1]) - 1] = '\0';
 	if (!ft_strcmp(tmp[0], "NO"))
-		allocate_no(tmp, info);
+		allocate_dir(tmp, info, NO);
 	else if (!ft_strcmp(tmp[0], "SO"))
-		allocate_so(tmp, info);
+		allocate_dir(tmp, info, SO);
 	else if (!ft_strcmp(tmp[0], "WE"))
-		allocate_we(tmp, info);
+		allocate_dir(tmp, info, WE);
 	else if (!ft_strcmp(tmp[0], "EA"))
-		allocate_ea(tmp, info);
+		allocate_dir(tmp, info, EA);
 	else if (!ft_strcmp(tmp[0], "F"))
 		allocate_flr(tmp, info);
 	else if (!ft_strcmp(tmp[0], "C"))

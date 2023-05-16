@@ -43,12 +43,9 @@ typedef struct s_mapping
 
 typedef struct s_texture
 {
-	enum e_dir			dir;
 	void				*img;
 	int					img_w;
 	int					img_h;
-	int					cnt;
-	struct s_texture	*next;
 }	t_texture;
 
 typedef struct s_map_data {
@@ -72,7 +69,7 @@ typedef struct s_game_info {
 //initailize
 void		parsing(t_game_info *info, char *map_file);
 void		info_init(t_game_info *info, t_obj *obj);
-void		texture_init(t_game_info *info);
+void		texture_init(t_texture *textures);
 
 //check
 void		check_texture(char *line, t_game_info *info);
@@ -80,18 +77,13 @@ void		check_extension(char *file_name);
 int			check_tmp_invalid(t_game_info *info, char **tmp);
 
 //mapping allowcate
-void		allocate_no(char **data, t_game_info *info);
-void		allocate_so(char **data, t_game_info *info);
-void		allocate_we(char **data, t_game_info *info);
-void		allocate_ea(char **data, t_game_info *info);
+void		allocate_dir(char **data, t_game_info *info, t_dir dir);
 void		allocate_flr(char **data, t_game_info *info);
 void		allocate_ceil(char **data, t_game_info *info);
 
 //struct linked list utils
-t_texture	*new_texture(int i);
-void		add_texture_node(t_texture *list, t_texture *new_node);
 t_mapping	*new_mapping(char *line, t_obj *obj);
-void		add_mapping_node(t_mapping *list, t_mapping *new_node);
+void		add_mapping_node(t_mapping **list, t_mapping *new_node);
 
 //utils
 void		print_game_info(const t_game_info *info);

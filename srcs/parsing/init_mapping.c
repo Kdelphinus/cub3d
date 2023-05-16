@@ -1,10 +1,15 @@
 #include "../../includes/cub3d.h"
 
-void	add_mapping_node(t_mapping *list, t_mapping *new_node)
+void	add_mapping_node(t_mapping **list, t_mapping *new_node)
 {
 	t_mapping	*cur;
 
-	cur = list;
+	cur = *list;
+	if (cur == NULL)
+	{
+		*list = new_node;
+		return ;
+	}
 	while (cur->next != NULL)
 		cur = cur->next;
 	cur->next = new_node;
