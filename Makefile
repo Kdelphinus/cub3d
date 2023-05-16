@@ -2,10 +2,10 @@ NAME = cub3d
 
 CC = cc
 
-CFLAG = -Wall -Wextra -Werror
-
+CFLAG = -Wall -Wextra -Werror -g
 
 MLXFLAG = -Lmlx -lmlx -framework OpenGL -framework AppKit
+
 INC = -I./includes/
 
 LIB_FLAG = -Llib -lft
@@ -13,6 +13,7 @@ LIB_FLAG = -Llib -lft
 GNL_FLAG = -Lgnl -lgnl
 
 SRC =	main.c \
+		execute/raycast.c \
 		parsing/parsing.c \
 		parsing/init_info.c \
 		parsing/init_mapping.c \

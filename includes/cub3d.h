@@ -1,28 +1,39 @@
 #ifndef CUB3D_H
 # define CUB3D_H
 
-# include <stdio.h>
-# include <stdlib.h>
-# include <unistd.h>
-# include <fcntl.h>
-# include <math.h>
-
-# include "../gnl/get_next_line.h"
-# include "../lib/libft.h"
 # include "../mlx/mlx.h"
+# include "../lib/libft.h"
+# include "../gnl/get_next_line.h"
+# include <stdio.h>
+# include <fcntl.h>
+# include <unistd.h>
+# include <stdlib.h>
+# include <math.h>
 
 # define FAILE 0
 # define SUCCESS 1
-
 # define FALSE 0
 # define TRUE 1
+# define mapWidth 24
+# define mapHeight 24
+# define screenWidth 640
+# define screenHeight 480
+# define X 0
+# define Y 1
+# define X_EVENT_KEY_PRESS	2
+# define KEY_UP				126
+# define KEY_DOWN			125
+# define KEY_LEFT			123
+# define KEY_RIGHT			124
+# define IMG_H 64
+# define IMG_W 64
 
 typedef enum e_dir {
-	NO = 0,
+	NO,
 	SO,
 	WE,
 	EA
-}	t_dir;
+}   t_dir;
 
 typedef struct s_obj
 {
@@ -56,19 +67,69 @@ typedef struct s_map_data {
 	int			ceil_count;
 	t_texture	*textures;
 }	t_map_data;
+
+typedef struct s_ray
+{
+	double	pos[2];
+	double	dir[2];
+	double	plane[2];
+	double	camera_x;
+	double	ray_dir[2];
+	int		map[2];
+	double	side_dist[2];
+	double	delta_dist[2];
+	double	perp_wall_dist;
+	int		step[2];
+	int		side;
+	int		line_h;
+	int		draw_start;
+	int		draw_end;
+	int		tex_num;
+	int		tex[2];
+	double	step_d;
+	double	tex_pos;
+	double	wall_x;
+	double	frame_time;
+	double	move_speed;
+	double	rot_speed;
+}	t_ray;
+
+typedef struct s_img
+{
+	void	*img_ptr;
+	int		*data;
+	int		size_l;
+	int		bpp;
+	int		endian;
+}	t_img;
+
+typedef struct s_game
+{
+	void		*mlx;
+	void		*win;
+	t_map_data	map;
+	t_ray		*ray;
+	t_img		*img;
+}	t_game;
+
 //player 방향, 위치, 벡터
 typedef struct s_game_info {
 	void		*mlx;
 	void		*win;
 	int			stop_flag;
+	t_ray		*ray; //-> 실행에서 사용될 벡터 구조체
+	t_img		*img; //-> 윈도우 이미지 구조체
 	//int		p_dir;
-	//struct	t_vector -> 실행에서 사용될 벡터 구조체
 	t_map_data	*map_data;
 }	t_game_info;
+
+int key_press(int keycode, t_ray *ray, t_map_data *map);
 
 //initailize
 void		parsing(t_game_info *info, char *map_file);
 void		info_init(t_game_info *info, t_obj *obj);
+void		img_init(t_game_info *game_info);
+void		ray_init(t_ray *ray);
 void		texture_init(t_texture *textures);
 
 //check
@@ -88,5 +149,8 @@ void		add_mapping_node(t_mapping **list, t_mapping *new_node);
 //utils
 void		print_game_info(const t_game_info *info);
 void		print_err_exit(void);
+
+//raycast
+void		ray_cast(t_ray *ray, t_game_info *game_info);
 
 #endif
