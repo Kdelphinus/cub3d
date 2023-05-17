@@ -1,5 +1,45 @@
 #include "../../includes/cub3d.h"
 
+
+static void check_map_invalid(char **map, t_obj *obj)
+{
+	int x;
+	int y;
+
+	y = 0;
+	while (y < obj->h)
+	{
+		x = 0;
+		while (x < obj->w)
+		{
+			if (map[y][x] == '0')
+			{
+				if (y == 0 || y == obj->h - 1 || x == 0 || x == obj->w - 1)
+				{
+					printf("외벽\n");
+					print_err_exit();
+				}
+				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ' || map[y][x - 1] == ' '
+						|| map[y][x + 1] == ' ')
+				{
+					printf("외벽2\n");
+					print_err_exit();
+				}
+			}
+			++x;
+		}
+		++y;
+	}
+}
+
+static void check_texture_data(t_game_info *info, t_obj *obj)
+{
+	if (info->map_data->ceil_count != 1 || info->map_data->flr_count != 1)
+		print_err_exit();
+	if (obj->e_cnt != 1 || obj->n_cnt != 1 || obj->s_cnt != 1 || obj->w_cnt != 1)
+		print_err_exit();
+}
+
 static void	read_file(int fd, t_game_info *info, t_obj *obj)
 {
 	t_mapping	*m_head;
@@ -12,8 +52,11 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 	while (info->stop_flag != TRUE)
 	{
 		line = get_next_line(fd);
+		if (line == NULL)
+			print_err_exit();
 		check_texture(line, info);
 	}
+	check_texture_data(info, obj);
 	while (line != NULL)
 	{
 		add_mapping_node(&m_head, new_mapping(line, obj, info));
@@ -40,6 +83,8 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 		free(m_head);
 		m_head = tmp;
 	}
+	check_map_invalid(info->map_data->map, obj);
+
 }
 
 void	parsing(t_game_info *info, char *file_name)
