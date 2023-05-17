@@ -1,11 +1,11 @@
 #include "../../includes/cub3d.h"
 
-static void set_ray(t_game_info *info, t_dir dir, int x, int y)
+static void	set_ray(t_game_info *info, t_dir dir, int x, int y)
 {
-	const double ray_dir_x[4] = {0, 0, -1, 1};
-	const double ray_dir_y[4] = {-1, 1, 0, 0};
-	const double ray_plane_x[4] = {0.66, -0.66, 0, 0};
-	const double ray_plane_y[4] = {0, 0, -0.66, 0.66};
+	const double	ray_dir_x[4] = {0, 0, -1, 1};
+	const double	ray_dir_y[4] = {-1, 1, 0, 0};
+	const double	ray_plane_x[4] = {0.66, -0.66, 0, 0};
+	const double	ray_plane_y[4] = {0, 0, -0.66, 0.66};
 
 	if (dir == NO)
 	{
@@ -71,10 +71,10 @@ static int	check_obj(char *line, t_obj *obj, t_game_info *info)
 		if (line[i] == '\0')
 			break ;
 		if (line[i] == 'N' && obj->n_cnt == 0)
-        {
+		{
 			set_ray(info, NO, i, obj->h);
-            ++obj->n_cnt;
-        }
+			++obj->n_cnt;
+		}
 		else if (line[i] == 'E' && obj->e_cnt == 0)
 		{
 			set_ray(info, EA, i, obj->h);

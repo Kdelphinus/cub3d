@@ -2,6 +2,6 @@
 
 void	print_err_exit(void)
 {
-	printf("error\n");
+	printf("Error\n");
 	exit(FAILE);
 }

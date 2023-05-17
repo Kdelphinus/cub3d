@@ -1,10 +1,10 @@
 #include "../../includes/cub3d.h"
 
 
-static void check_map_invalid(char **map, t_obj *obj)
+static void	check_map_invalid(char **map, t_obj *obj)
 {
-	int x;
-	int y;
+	int	x;
+	int	y;
 
 	y = 0;
 	while (y < obj->h)
@@ -15,16 +15,10 @@ static void check_map_invalid(char **map, t_obj *obj)
 			if (map[y][x] == '0')
 			{
 				if (y == 0 || y == obj->h - 1 || x == 0 || x == obj->w - 1)
-				{
-					printf("외벽\n");
 					print_err_exit();
-				}
-				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' ' || map[y][x - 1] == ' '
-						|| map[y][x + 1] == ' ')
-				{
-					printf("외벽2\n");
+				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
+				|| map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
 					print_err_exit();
-				}
 			}
 			++x;
 		}

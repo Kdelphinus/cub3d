@@ -39,8 +39,8 @@ int	simple_atoi(const char *str)
 
 char	**simple_split_rgb(char *line)
 {
-	int 	i;
-	int 	comma_cnt;
+	int	i;
+	int	comma_cnt;
 
 	i = 0;
 	comma_cnt = 0;
@@ -68,7 +68,7 @@ void	allocate_flr(char **data, t_game_info *info)
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
 		print_err_exit();
 	info->map_data->flr_color = simple_atoi(rgb[0]) << 16
-								| simple_atoi(rgb[1]) << 8 | simple_atoi(rgb[2]);
+		| simple_atoi(rgb[1]) << 8 | simple_atoi(rgb[2]);
 	while (rgb[i] != NULL)
 	{
 		free(rgb[i]);
@@ -90,7 +90,7 @@ void	allocate_ceil(char **data, t_game_info *info)
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
 		print_err_exit();
 	info->map_data->ceil_color = simple_atoi(rgb[0]) << 16
-								 | simple_atoi(rgb[1]) << 8 | simple_atoi(rgb[2]);
+		| simple_atoi(rgb[1]) << 8 | simple_atoi(rgb[2]);
 	while (rgb[i] != NULL)
 	{
 		free(rgb[i]);
