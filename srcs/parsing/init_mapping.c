@@ -2,10 +2,10 @@
 
 static void set_ray(t_game_info *info, t_dir dir, int x, int y)
 {
-	const float ray_dir_x[4] = {0, 0, 1, -1};
-	const float ray_dir_y[4] = {-1, 1, 0, 0};
-	const float ray_plane_x[4] = {0.66, -0.66, 0, 0};
-	const float ray_plane_y[4] = {0, 0, 0.66, -0.66};
+	const double ray_dir_x[4] = {0, 0, -1, 1};
+	const double ray_dir_y[4] = {-1, 1, 0, 0};
+	const double ray_plane_x[4] = {0.66, -0.66, 0, 0};
+	const double ray_plane_y[4] = {0, 0, -0.66, 0.66};
 
 	if (dir == NO)
 	{

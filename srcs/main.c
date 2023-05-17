@@ -8,17 +8,17 @@ int key_press(int keycode, t_game_info *game_info)
 	if (keycode == KEY_UP)
 	{
 		printf("key up\n");
-		if (game_info->map_data->map[(int)(game_info->ray->pos[Y] + game_info->ray->dir[Y] * game_info->ray->move_speed)][(int)(game_info->ray->pos[X])] == '0')
+		if (game_info->map_data->map[(int)(game_info->ray->pos[Y] + game_info->ray->dir[Y] * game_info->ray->move_speed)][(int)(game_info->ray->pos[X])] != '1')
 			game_info->ray->pos[Y] += game_info->ray->dir[Y] * game_info->ray->move_speed;
-		if (game_info->map_data->map[(int)(game_info->ray->pos[Y])][(int)(game_info->ray->pos[X] + game_info->ray->dir[X] * game_info->ray->move_speed)] == '0')
+		if (game_info->map_data->map[(int)(game_info->ray->pos[Y])][(int)(game_info->ray->pos[X] + game_info->ray->dir[X] * game_info->ray->move_speed)] != '1')
 			game_info->ray->pos[X] += game_info->ray->dir[X] * game_info->ray->move_speed;
 	}
 	if (keycode == KEY_DOWN)
 	{
 		printf("key down\n");
-		if (game_info->map_data->map[(int)(game_info->ray->pos[Y] - game_info->ray->dir[Y] * game_info->ray->move_speed)][(int)(game_info->ray->pos[X])] == '0')
+		if (game_info->map_data->map[(int)(game_info->ray->pos[Y] - game_info->ray->dir[Y] * game_info->ray->move_speed)][(int)(game_info->ray->pos[X])] != '1')
 			game_info->ray->pos[Y] -= game_info->ray->dir[Y] * game_info->ray->move_speed;
-		if (game_info->map_data->map[(int)(game_info->ray->pos[Y])][(int)(game_info->ray->pos[X] - game_info->ray->dir[X] * game_info->ray->move_speed)] == '0')
+		if (game_info->map_data->map[(int)(game_info->ray->pos[Y])][(int)(game_info->ray->pos[X] - game_info->ray->dir[X] * game_info->ray->move_speed)] != '1')
 			game_info->ray->pos[X] -= game_info->ray->dir[X] * game_info->ray->move_speed;
 	}
 	if (keycode == KEY_LEFT)
