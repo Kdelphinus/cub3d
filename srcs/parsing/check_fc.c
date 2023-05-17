@@ -3,7 +3,7 @@
 int	check_tmp_invalid(t_game_info *info, char **tmp)
 {
 	if (tmp == NULL)
-		print_err_exit();
+		print_err_exit(WRONGDATA);
 	if (ft_strlen(tmp[0]) > 3 || tmp[1] == NULL || tmp[2] != NULL)
 	{
 		if (tmp[0][0] == '\n')
@@ -29,11 +29,11 @@ int	simple_atoi(const char *str)
 		else if (*str == '\0')
 		{
 			if (sum > 255)
-				print_err_exit();
+				print_err_exit(WRONGDATA);
 			return (sum);
 		}
 		else
-			print_err_exit();
+			print_err_exit(WRONGDATA);
 	}
 }
 
@@ -51,7 +51,7 @@ char	**simple_split_rgb(char *line)
 		++i;
 	}
 	if (comma_cnt != 2)
-		print_err_exit();
+		print_err_exit(WRONGDATA);
 	return (ft_split(line, ','));
 }
 
@@ -62,11 +62,11 @@ void	allocate_flr(char **data, t_game_info *info)
 
 	i = 0;
 	if (info->map_data->flr_count != 0)
-		print_err_exit();
+		print_err_exit(WRONGDATA);
 	++info->map_data->flr_count;
 	rgb = simple_split_rgb(data[1]);
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
-		print_err_exit();
+		print_err_exit(WRONGDATA);
 	info->map_data->flr_color = simple_atoi(rgb[0]) << 16
 		| simple_atoi(rgb[1]) << 8 | simple_atoi(rgb[2]);
 	while (rgb[i] != NULL)
@@ -84,11 +84,11 @@ void	allocate_ceil(char **data, t_game_info *info)
 
 	i = 0;
 	if (info->map_data->ceil_count != 0)
-		print_err_exit();
+		print_err_exit(WRONGDATA);
 	++info->map_data->ceil_count;
 	rgb = simple_split_rgb(data[1]);
 	if (rgb[0] == NULL || rgb[1] == NULL || rgb[2] == NULL)
-		print_err_exit();
+		print_err_exit(WRONGDATA);
 	info->map_data->ceil_color = simple_atoi(rgb[0]) << 16
 		| simple_atoi(rgb[1]) << 8 | simple_atoi(rgb[2]);
 	while (rgb[i] != NULL)

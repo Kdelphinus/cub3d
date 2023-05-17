@@ -20,7 +20,6 @@ SRC =	main.c \
 		parsing/check.c \
 		parsing/check_dir.c \
 		parsing/check_fc.c \
-		utiles/print_info.c \
 		utiles/error.c
 
 SRC_DIR = ./srcs/

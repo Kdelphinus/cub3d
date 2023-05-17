@@ -7,10 +7,7 @@ void	check_extension(char *file_name)
 	len = ft_strlen(file_name) - 1;
 	if (len < 4 || file_name[len - 3] != '.' || file_name[len - 2] != 'c' \
 		|| file_name[len - 1] != 'u' || file_name[len] != 'b' )
-	{
-		printf("Error\nThis is not a valid file name.\n");
-		print_err_exit();
-	}
+		print_err_exit(NOFILE);
 }
 
 void	check_texture(char *line, t_game_info *info)
@@ -23,9 +20,7 @@ void	check_texture(char *line, t_game_info *info)
 	if (!check_tmp_invalid(info, tmp))
 	{
 		if (tmp[0][0] == '\n')
-		{
 			free(line);
-		}
 		while (tmp[i] != NULL)
 		{
 			free(tmp[i]);

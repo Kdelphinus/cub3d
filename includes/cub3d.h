@@ -28,6 +28,13 @@
 # define IMG_H				64
 # define IMG_W				64
 
+typedef enum e_errno {
+	NOWALL,
+	WRONGDATA,
+	NOFILE,
+
+}	t_errno;
+
 typedef enum e_dir {
 	NO = 0,
 	SO,
@@ -120,7 +127,6 @@ typedef struct s_game_info {
 	int			stop_flag;
 	t_ray		*ray;
 	t_img		*img;
-	//int		p_dir;
 	t_map_data	*map_data;
 }	t_game_info;
 
@@ -147,8 +153,7 @@ t_mapping	*new_mapping(char *line, t_obj *obj, t_game_info *info);
 void		add_mapping_node(t_mapping **list, t_mapping *new_node);
 
 //utils
-void		print_game_info(const t_game_info *info);
-void		print_err_exit(void);
+void		print_err_exit(int errno);
 
 //raycast
 void		ray_cast(t_ray *ray, t_game_info *game_info);

@@ -93,7 +93,7 @@ static int	check_obj(char *line, t_obj *obj, t_game_info *info)
 		else if (line[i] == ' ' || line[i] == '0' || line[i] == '1')
 			continue ;
 		else
-			print_err_exit();
+			print_err_exit(WRONGDATA);
 	}
 	++obj->h;
 	return (i);

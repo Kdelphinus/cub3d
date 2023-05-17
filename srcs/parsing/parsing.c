@@ -15,10 +15,10 @@ static void	check_map_invalid(char **map, t_obj *obj)
 			if (map[y][x] == '0')
 			{
 				if (y == 0 || y == obj->h - 1 || x == 0 || x == obj->w - 1)
-					print_err_exit();
+					print_err_exit(WRONGDATA);
 				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
 				|| map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
-					print_err_exit();
+					print_err_exit(WRONGDATA);
 			}
 			++x;
 		}
@@ -26,25 +26,22 @@ static void	check_map_invalid(char **map, t_obj *obj)
 	}
 }
 
-static void check_texture_data(t_game_info *info)
+static void	check_texture_data(t_game_info *info)
 {
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 0;
 	if (info->map_data->ceil_count != 1 || info->map_data->flr_count != 1)
-		print_err_exit();
+		print_err_exit(WRONGDATA);
 	while (i < 3)
 	{
 		j = i + 1;
 		while (j < 4)
 		{
 			if (ft_strcmp(info->map_data->textures[i].path,
-				info->map_data->textures[j].path) == 0)
-			{
-				printf("here\n");
-				print_err_exit();
-			}
+					info->map_data->textures[j].path) == 0)
+				print_err_exit(WRONGDATA);
 			++j;
 		}
 		++i;
@@ -64,7 +61,7 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 	{
 		line = get_next_line(fd);
 		if (line == NULL)
-			print_err_exit();
+			print_err_exit(WRONGDATA);
 		check_texture(line, info);
 	}
 	check_texture_data(info);
@@ -95,7 +92,6 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 		m_head = tmp;
 	}
 	check_map_invalid(info->map_data->map, obj);
-
 }
 
 void	parsing(t_game_info *info, char *file_name)
@@ -108,10 +104,7 @@ void	parsing(t_game_info *info, char *file_name)
 	info_init(info, obj);
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
-	{
-		printf("Error\nThe file name or data is incorrect.\n");
-		exit(fd);
-	}
+		print_err_exit(NOFILE);
 	read_file(fd, info, obj);
 	free(obj);
 }
