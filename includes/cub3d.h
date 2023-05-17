@@ -10,30 +10,30 @@
 # include <stdlib.h>
 # include <math.h>
 
-# define FAILE 0
-# define SUCCESS 1
-# define FALSE 0
-# define TRUE 1
-# define mapWidth 24
-# define mapHeight 24
-# define screenWidth 640
-# define screenHeight 480
-# define X 0
-# define Y 1
+# define FAILE				0
+# define SUCCESS			1
+# define FALSE				0
+# define TRUE				1
+# define MAPWWITH			24
+# define MAPHEIGHT			24
+# define SCREENWIDTH		640
+# define SCREENHEIGHT		480
+# define X					0
+# define Y					1
 # define X_EVENT_KEY_PRESS	2
 # define KEY_UP				126
 # define KEY_DOWN			125
 # define KEY_LEFT			123
 # define KEY_RIGHT			124
-# define IMG_H 64
-# define IMG_W 64
+# define IMG_H				64
+# define IMG_W				64
 
 typedef enum e_dir {
-	NO,
+	NO = 0,
 	SO,
 	WE,
 	EA
-}   t_dir;
+}	t_dir;
 
 typedef struct s_obj
 {
@@ -117,13 +117,13 @@ typedef struct s_game_info {
 	void		*mlx;
 	void		*win;
 	int			stop_flag;
-	t_ray		*ray; //-> 실행에서 사용될 벡터 구조체
-	t_img		*img; //-> 윈도우 이미지 구조체
+	t_ray		*ray;
+	t_img		*img;
 	//int		p_dir;
 	t_map_data	*map_data;
 }	t_game_info;
 
-int key_press(int keycode, t_ray *ray, t_map_data *map);
+int			key_press(int keycode, t_ray *ray, t_map_data *map);
 
 //initailize
 void		parsing(t_game_info *info, char *map_file);

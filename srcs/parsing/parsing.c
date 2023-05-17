@@ -5,7 +5,7 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 	t_mapping	*m_head;
 	t_mapping	*tmp;
 	char		*line;
-	int 		i;
+	int			i;
 
 	i = 0;
 	m_head = NULL;
@@ -20,7 +20,7 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 		line = get_next_line(fd);
 	}
 	tmp = m_head;
-	info->map_data->map = malloc(sizeof(char*) * obj->h);
+	info->map_data->map = malloc(sizeof(char *) * obj->h);
 	while (i < obj->h)
 	{
 		info->map_data->map[i] = malloc(sizeof(char) * obj->w);

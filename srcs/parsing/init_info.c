@@ -35,9 +35,11 @@ void	ray_init(t_ray *ray)
 
 void	img_init(t_game_info *game_info)
 {
-	game_info->img->img_ptr = mlx_new_image(game_info->mlx, screenWidth, screenHeight);
-	game_info->img->data = (int *)mlx_get_data_addr(game_info->img->img_ptr, 
-		&game_info->img->bpp, &game_info->img->size_l, &game_info->img->endian);
+	game_info->img->img_ptr = mlx_new_image(game_info->mlx,
+			SCREENWIDTH, SCREENHEIGHT);
+	game_info->img->data = (int *)mlx_get_data_addr(game_info->img->img_ptr,
+			&game_info->img->bpp, &game_info->img->size_l,
+			&game_info->img->endian);
 }
 
 void	info_init(t_game_info *info, t_obj *obj)

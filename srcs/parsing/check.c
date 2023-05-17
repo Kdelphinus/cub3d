@@ -16,7 +16,7 @@ void	check_extension(char *file_name)
 void	check_texture(char *line, t_game_info *info)
 {
 	char	**tmp;
-	int 	i;
+	int		i;
 
 	i = 0;
 	tmp = ft_split(line, ' ');
