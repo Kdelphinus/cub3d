@@ -58,10 +58,16 @@ int	ft_close()
 	exit(0); // TODO 바로 exit해도 되나
 }
 
+void	l()
+{
+	system("leaks cub3d");
+}
+
 int	main(int ac, char **av)
 {
 	t_game_info	*game_info;
 
+	atexit(l);
 	if (ac != 2)
 		return (0);
 	game_info = (t_game_info *)malloc(sizeof(t_game_info));
