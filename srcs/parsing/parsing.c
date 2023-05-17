@@ -16,7 +16,7 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 	}
 	while (line != NULL)
 	{
-		add_mapping_node(&m_head, new_mapping(line, obj));
+		add_mapping_node(&m_head, new_mapping(line, obj, info));
 		line = get_next_line(fd);
 	}
 	tmp = m_head;

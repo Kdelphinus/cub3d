@@ -16,12 +16,12 @@ void	texture_init(t_texture *textures)
 
 void	ray_init(t_ray *ray)
 {
-	ray->pos[X] = 5.5; //위치 찾아주세요
+	ray->pos[X] = 5.5; //위치 찾아주세요 소수점으로 넣어줘야 함?
 	ray->pos[Y] = 9.5;
 	ray->dir[X] = 1; // 방향 정해주세요
 	ray->dir[Y] = 0;
 	ray->plane[X] = 0;
-	ray->plane[Y] = 0.66; //방향에 따라 방향과 수직이되는 좌표에 넣어주세요
+	ray->plane[Y] = 0.66; // 애도
 	ray->camera_x = 0;
 	ray->ray_dir[X] = 0;
 	ray->ray_dir[Y] = 0;

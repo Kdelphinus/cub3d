@@ -141,7 +141,7 @@ void		allocate_flr(char **data, t_game_info *info);
 void		allocate_ceil(char **data, t_game_info *info);
 
 //struct linked list utils
-t_mapping	*new_mapping(char *line, t_obj *obj);
+t_mapping	*new_mapping(char *line, t_obj *obj, t_game_info *info);
 void		add_mapping_node(t_mapping **list, t_mapping *new_node);
 
 //utils
