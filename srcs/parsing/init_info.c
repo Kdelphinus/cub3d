@@ -45,7 +45,7 @@ void	img_init(t_game_info *game_info)
 void	info_init(t_game_info *info, t_obj *obj)
 {
 	info->mlx = mlx_init();
-	info->win = mlx_new_window(info->mlx, 1980, 1080, "./cub3d");
+	info->win = mlx_new_window(info->mlx, SCREENWIDTH, SCREENHEIGHT, "./cub3d");
 	info->stop_flag = FALSE;
 	info->map_data = (t_map_data *)malloc(sizeof(t_map_data));
 	info->map_data->map = 0;

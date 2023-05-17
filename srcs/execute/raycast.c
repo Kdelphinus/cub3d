@@ -94,12 +94,11 @@ void	choice_tex(t_ray *ray)
 	else
 		ray->wall_x = ray->pos[X] + ray->perp_wall_dist * ray->dir[X];
 	ray->wall_x -= floor(ray->wall_x);
-	int tex[2];
-	tex[X] = (int)(ray->wall_x * (double)IMG_W);
+	ray->tex[X] = (int)(ray->wall_x * (double)IMG_W);
 	if (ray->side == 0 && ray->ray_dir[X] > 0)
-		tex[X] = IMG_W - tex[X] - 1;
+		ray->tex[X] = IMG_W - ray->tex[X] - 1;
 	if (ray->side == 1 && ray->ray_dir[Y] < 0)
-		tex[X] = IMG_W - tex[X] - 1;
+		ray->tex[X] = IMG_W - ray->tex[X] - 1;
 }
 
 void	put_color(int x, t_ray *ray, t_texture *texture, t_game_info *game_info)
@@ -124,7 +123,7 @@ void	put_color(int x, t_ray *ray, t_texture *texture, t_game_info *game_info)
 	{
 		ray->tex[Y] = (int)ray->tex_pos & (IMG_H - 1);
 		ray->tex_pos += ray->step_d;
-		color = tex[ray->tex[Y] * IMG_W + tex[X]];
+		color = tex[ray->tex[Y] * IMG_W + ray->tex[X]];
 		if (ray->side == 1)
 			color /= 2;
 		game_info->img->data[j * SCREENWIDTH + x] = color;

@@ -123,7 +123,7 @@ typedef struct s_game_info {
 	t_map_data	*map_data;
 }	t_game_info;
 
-int			key_press(int keycode, t_ray *ray, t_map_data *map);
+int			key_press(int keycode, t_game_info *game_info);
 
 //initailize
 void		parsing(t_game_info *info, char *map_file);
