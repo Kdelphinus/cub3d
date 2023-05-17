@@ -59,10 +59,10 @@ int	main(int ac, char **av)
 		return (0);
 	game_info = (t_game_info *)malloc(sizeof(t_game_info));
 	parsing(game_info, av[1]);
-    ray_cast(game_info->ray, game_info);
-	mlx_hook(game_info->win, X_EVENT_KEY_PRESS, 0, &key_press, game_info);
-	mlx_loop_hook(game_info->mlx, &main_loop, game_info);
-    mlx_loop(game_info->mlx);
-	system("leaks cub3d");
+//    ray_cast(game_info->ray, game_info);
+//	mlx_hook(game_info->win, X_EVENT_KEY_PRESS, 0, &key_press, game_info);
+//	mlx_loop_hook(game_info->mlx, &main_loop, game_info);
+//  mlx_loop(game_info->mlx);
+//	system("leaks cub3d");
 	return (0);
 }
