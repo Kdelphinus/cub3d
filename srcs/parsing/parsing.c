@@ -34,6 +34,13 @@ static void	check_texture_data(t_game_info *info)
 	i = 0;
 	if (info->map_data->ceil_count != 1 || info->map_data->flr_count != 1)
 		print_err_exit(WRONGDATA);
+    while (i < 4)
+    {
+        if (info->map_data->textures[i].path == NULL)
+            print_err_exit(WRONGDATA);
+        ++i;
+    }
+    i = 0;
 	while (i < 3)
 	{
 		j = i + 1;

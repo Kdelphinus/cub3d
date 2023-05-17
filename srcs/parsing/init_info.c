@@ -48,7 +48,7 @@ void	info_init(t_game_info *info, t_obj *obj)
 	info->mlx = mlx_init();
 	info->win = mlx_new_window(info->mlx, SCREENWIDTH, SCREENHEIGHT, "./cub3d");
 	info->stop_flag = FALSE;
-	info->map_data = (t_map_data *)malloc(sizeof(t_map_data));
+	info->map_data = malloc(sizeof(t_map_data));
 	info->map_data->map = NULL;
 	info->map_data->flr_color = 0;
 	info->map_data->flr_count = 0;
@@ -57,12 +57,8 @@ void	info_init(t_game_info *info, t_obj *obj)
 	info->map_data->textures = malloc(sizeof(t_texture) * 4);
 	texture_init(info->map_data->textures);
 	info->ray = malloc(sizeof(t_ray));
-	if (!info->ray)
-		exit(1);
 	ray_init(info->ray);
 	info->img = malloc(sizeof(t_img));
-	if (!info->img)
-		exit(1);
 	img_init(info);
 	obj->n_cnt = 0;
 	obj->e_cnt = 0;
