@@ -124,8 +124,8 @@ void	put_color(int x, t_ray *ray, t_texture *texture, t_game_info *game_info)
 		ray->tex[Y] = (int)ray->tex_pos & (IMG_H - 1);
 		ray->tex_pos += ray->step_d;
 		color = tex[ray->tex[Y] * IMG_W + ray->tex[X]];
-		if (ray->side == 1)
-			color /= 2;
+//		if (ray->side == 1)
+//			color /= 2;
 		game_info->img->data[j * SCREENWIDTH + x] = color;
 	}
 }
