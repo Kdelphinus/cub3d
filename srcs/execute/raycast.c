@@ -95,9 +95,9 @@ void	choice_tex(t_ray *ray)
 		ray->wall_x = ray->pos[X] + ray->perp_wall_dist * ray->dir[X];
 	ray->wall_x -= floor(ray->wall_x);
 	ray->tex[X] = (int)(ray->wall_x * (double)IMG_W);
-	if (ray->side == 0 && ray->ray_dir[X] > 0)
+	if (ray->side == 0 && ray->ray_dir[X] < 0)
 		ray->tex[X] = IMG_W - ray->tex[X] - 1;
-	if (ray->side == 1 && ray->ray_dir[Y] < 0)
+	if (ray->side == 1 && ray->ray_dir[Y] > 0)
 		ray->tex[X] = IMG_W - ray->tex[X] - 1;
 }
 
