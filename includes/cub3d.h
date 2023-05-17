@@ -20,10 +20,12 @@
 # define Y					1
 # define X_EVENT_KEY_PRESS	2
 # define X_EVENT_KEY_EXIT	17
-# define KEY_UP				126
-# define KEY_DOWN			125
 # define KEY_LEFT			123
 # define KEY_RIGHT			124
+# define KEY_W				13
+# define KEY_A				1
+# define KEY_S				2
+# define KEY_D				3
 # define KEY_ESC			53
 # define IMG_H				64
 # define IMG_W				64
@@ -120,7 +122,6 @@ typedef struct s_game
 	t_img		*img;
 }	t_game;
 
-//player 방향, 위치, 벡터
 typedef struct s_game_info {
 	void		*mlx;
 	void		*win;
@@ -157,5 +158,18 @@ void		print_err_exit(int errno);
 
 //raycast
 void		ray_cast(t_ray *ray, t_game_info *game_info);
+
+//render
+void		window_init(t_map_data *map_data, t_img *img);
+void		choice_tex(t_ray *ray);
+void		put_color(int x, t_ray *ray, t_texture \
+*texture, t_game_info *game_info);
+
+//key press
+void		key_rotate(int keycode, t_ray *ray);
+void		move_side(int keycode, t_ray *ray, char **map);
+void		key_move(int keycode, t_ray *ray, char **map);
+
+
 
 #endif

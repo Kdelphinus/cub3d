@@ -14,6 +14,8 @@ GNL_FLAG = -Lgnl -lgnl
 
 SRC =	main.c \
 		execute/raycast.c \
+		execute/rendering.c \
+		execute/key_press.c \
 		parsing/parsing.c \
 		parsing/init_info.c \
 		parsing/init_mapping.c \
