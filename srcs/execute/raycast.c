@@ -70,7 +70,7 @@ void	dda(t_ray *ray, t_map_data *map_data)
 			ray->map[Y] += ray->step[Y];
 			ray->side = 1;
 		}
-		if (map_data->map[ray->map[Y]][ray->map[X]] == '1') // TODO segfault
+		if (map_data->map[ray->map[Y]][ray->map[X]] == '1')
 			break ;
 	}
 	if (ray->side == 0)
