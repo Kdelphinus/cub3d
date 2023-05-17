@@ -23,7 +23,7 @@ int	simple_atoi(const char *str)
 	{
 		if (*str >= '0' && *str <= '9')
 		{
-			sum = (sum * 10) * (*str - '0');
+			sum = (sum * 10) + (*str - '0');
 			str++;
 		}
 		else if (*str == '\0')

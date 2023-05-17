@@ -32,11 +32,9 @@ static void check_map_invalid(char **map, t_obj *obj)
 	}
 }
 
-static void check_texture_data(t_game_info *info, t_obj *obj)
+static void check_texture_data(t_game_info *info)
 {
 	if (info->map_data->ceil_count != 1 || info->map_data->flr_count != 1)
-		print_err_exit();
-	if (obj->e_cnt != 1 || obj->n_cnt != 1 || obj->s_cnt != 1 || obj->w_cnt != 1)
 		print_err_exit();
 }
 
@@ -56,7 +54,7 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 			print_err_exit();
 		check_texture(line, info);
 	}
-	check_texture_data(info, obj);
+	check_texture_data(info);
 	while (line != NULL)
 	{
 		add_mapping_node(&m_head, new_mapping(line, obj, info));
