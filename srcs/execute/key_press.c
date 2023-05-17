@@ -73,7 +73,6 @@ void	key_move(int keycode, t_ray *ray, char **map)
 
 int	key_press(int keycode, t_game_info *game_info)
 {
-	printf("%d\n", keycode);
 	if (keycode == KEY_ESC)
 		exit(0);
 	else if (keycode == KEY_W || keycode == KEY_A \
