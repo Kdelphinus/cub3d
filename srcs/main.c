@@ -5,7 +5,9 @@ int key_press(int keycode, t_game_info *game_info)
 	double	old_dir;
 	double	old_planeX;
 
-	if (keycode == KEY_UP)
+	if (keycode == KEY_ESC)
+		exit(0); // TODO exit만 해도 되나
+	else if (keycode == KEY_UP)
 	{
 		printf("key up\n");
 		if (game_info->map_data->map[(int)(game_info->ray->pos[Y] + game_info->ray->dir[Y] * game_info->ray->move_speed)][(int)(game_info->ray->pos[X])] != '1')
@@ -13,7 +15,7 @@ int key_press(int keycode, t_game_info *game_info)
 		if (game_info->map_data->map[(int)(game_info->ray->pos[Y])][(int)(game_info->ray->pos[X] + game_info->ray->dir[X] * game_info->ray->move_speed)] != '1')
 			game_info->ray->pos[X] += game_info->ray->dir[X] * game_info->ray->move_speed;
 	}
-	if (keycode == KEY_DOWN)
+	else if (keycode == KEY_DOWN)
 	{
 		printf("key down\n");
 		if (game_info->map_data->map[(int)(game_info->ray->pos[Y] - game_info->ray->dir[Y] * game_info->ray->move_speed)][(int)(game_info->ray->pos[X])] != '1')
@@ -21,7 +23,7 @@ int key_press(int keycode, t_game_info *game_info)
 		if (game_info->map_data->map[(int)(game_info->ray->pos[Y])][(int)(game_info->ray->pos[X] - game_info->ray->dir[X] * game_info->ray->move_speed)] != '1')
 			game_info->ray->pos[X] -= game_info->ray->dir[X] * game_info->ray->move_speed;
 	}
-	if (keycode == KEY_LEFT)
+	else if (keycode == KEY_LEFT)
 	{
 		printf("key left\n");
 		old_dir = game_info->ray->dir[X];
@@ -31,7 +33,7 @@ int key_press(int keycode, t_game_info *game_info)
 		game_info->ray->plane[X] = game_info->ray->plane[X] * cos(-game_info->ray->rot_speed) - game_info->ray->plane[Y] * sin(-game_info->ray->rot_speed);
 		game_info->ray->plane[Y] = old_planeX * sin(-game_info->ray->rot_speed) + game_info->ray->plane[Y] * cos(-game_info->ray->rot_speed);
 	}
-	if (keycode == KEY_RIGHT)
+	else if (keycode == KEY_RIGHT)
 	{
 		printf("key right\n");
 		old_dir = game_info->ray->dir[X];
@@ -51,6 +53,11 @@ int	main_loop(t_game_info *game_info)
 	return (0);
 }
 
+int	ft_close()
+{
+	exit(0); // TODO 바로 exit해도 되나
+}
+
 int	main(int ac, char **av)
 {
 	t_game_info	*game_info;
@@ -61,6 +68,7 @@ int	main(int ac, char **av)
 	parsing(game_info, av[1]);
     ray_cast(game_info->ray, game_info);
 	mlx_hook(game_info->win, X_EVENT_KEY_PRESS, 0, &key_press, game_info);
+	mlx_hook(game_info->win, X_EVENT_KEY_EXIT, 0, &ft_close, game_info);
 	mlx_loop_hook(game_info->mlx, &main_loop, game_info);
     mlx_loop(game_info->mlx);
 	system("leaks cub3d");

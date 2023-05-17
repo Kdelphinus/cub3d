@@ -103,6 +103,7 @@ void	choice_tex(t_ray *ray)
 
 void	put_color(int x, t_ray *ray, t_texture *texture, t_game_info *game_info)
 {
+	int	j;
 	int	*tex;
 	int	bpp;
 	int	sl;
@@ -119,7 +120,8 @@ void	put_color(int x, t_ray *ray, t_texture *texture, t_game_info *game_info)
 	ray->step_d = 1.0 * IMG_H / ray->line_h;
 	ray->tex_pos = (ray->draw_start - SCREENHEIGHT / 2 + ray->line_h / 2) * ray->step_d;
 	tex = (int *)mlx_get_data_addr(texture[ray->tex_num].img, &bpp, &sl, &endian);
-	for (int j = ray->draw_start; j < ray->draw_end; j++)
+	j = ray->draw_start - 1;
+	while (++j < ray->draw_end)
 	{
 		ray->tex[Y] = (int)ray->tex_pos & (IMG_H - 1);
 		ray->tex_pos += ray->step_d;

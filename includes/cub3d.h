@@ -19,10 +19,12 @@
 # define X					0
 # define Y					1
 # define X_EVENT_KEY_PRESS	2
+# define X_EVENT_KEY_EXIT	17
 # define KEY_UP				126
 # define KEY_DOWN			125
 # define KEY_LEFT			123
 # define KEY_RIGHT			124
+# define KEY_ESC			53
 # define IMG_H				64
 # define IMG_W				64
 
