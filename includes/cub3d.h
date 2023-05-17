@@ -55,6 +55,7 @@ typedef struct s_mapping
 typedef struct s_texture
 {
 	void				*img;
+	char				*path;
 	int					img_w;
 	int					img_h;
 }	t_texture;
@@ -130,7 +131,6 @@ void		parsing(t_game_info *info, char *map_file);
 void		info_init(t_game_info *info, t_obj *obj);
 void		img_init(t_game_info *game_info);
 void		ray_init(t_ray *ray);
-void		texture_init(t_texture *textures);
 
 //check
 void		check_texture(char *line, t_game_info *info);

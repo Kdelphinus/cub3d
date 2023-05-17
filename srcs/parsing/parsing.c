@@ -34,8 +34,27 @@ static void check_map_invalid(char **map, t_obj *obj)
 
 static void check_texture_data(t_game_info *info)
 {
+	int i;
+	int j;
+
+	i = 0;
 	if (info->map_data->ceil_count != 1 || info->map_data->flr_count != 1)
 		print_err_exit();
+	while (i < 3)
+	{
+		j = i + 1;
+		while (j < 4)
+		{
+			if (ft_strcmp(info->map_data->textures[i].path,
+				info->map_data->textures[j].path) == 0)
+			{
+				printf("here\n");
+				print_err_exit();
+			}
+			++j;
+		}
+		++i;
+	}
 }
 
 static void	read_file(int fd, t_game_info *info, t_obj *obj)

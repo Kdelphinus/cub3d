@@ -1,6 +1,6 @@
 #include "cub3d.h"
 
-void	texture_init(t_texture *textures)
+static void	texture_init(t_texture *textures)
 {
 	int	i;
 
@@ -8,6 +8,7 @@ void	texture_init(t_texture *textures)
 	while (i < 4)
 	{
 		textures[i].img = NULL;
+		textures[i].path = NULL;
 		textures[i].img_w = 0;
 		textures[i].img_h = 0;
 		++i;
@@ -16,12 +17,12 @@ void	texture_init(t_texture *textures)
 
 void	ray_init(t_ray *ray)
 {
-	ray->pos[X] = 5.5; //위치 찾아주세요 소수점으로 넣어줘야 함?
+	ray->pos[X] = 5.5;
 	ray->pos[Y] = 9.5;
-	ray->dir[X] = 1; // 방향 정해주세요
+	ray->dir[X] = 1;
 	ray->dir[Y] = 0;
 	ray->plane[X] = 0;
-	ray->plane[Y] = 0.66; // 애도
+	ray->plane[Y] = 0.66;
 	ray->camera_x = 0;
 	ray->ray_dir[X] = 0;
 	ray->ray_dir[Y] = 0;
@@ -48,7 +49,7 @@ void	info_init(t_game_info *info, t_obj *obj)
 	info->win = mlx_new_window(info->mlx, SCREENWIDTH, SCREENHEIGHT, "./cub3d");
 	info->stop_flag = FALSE;
 	info->map_data = (t_map_data *)malloc(sizeof(t_map_data));
-	info->map_data->map = 0;
+	info->map_data->map = NULL;
 	info->map_data->flr_color = 0;
 	info->map_data->flr_count = 0;
 	info->map_data->ceil_color = 0;
