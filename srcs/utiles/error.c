@@ -2,9 +2,11 @@
 
 void	print_err_exit(int errno)
 {
-	printf("Error :");
+	printf("Error : ");
 	if (errno == NOFILE)
 		printf("The file name is incorrect.\n");
+	if (errno == WRONGARG)
+		printf("Usage ./cub3d [MAP_FILE] only\n");
 	else if (errno == NOWALL)
 		printf("This map is not surrounded by walls.\n");
 	else if (errno == WRONGDATA)
