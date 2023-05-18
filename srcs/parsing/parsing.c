@@ -1,29 +1,30 @@
 #include "../../includes/cub3d.h"
 
+static void	check_space_map(char **map, int x, int y)
+{
+	if ((map[y - 1][x] != ' ' && map[y - 1][x] != '1')
+		|| (map[y + 1][x] != ' ' && map[y + 1][x] != '1')
+		|| (map[y][x - 1] != ' ' && map[y][x - 1] != '1')
+		|| (map[y][x + 1] != ' ' && map[y][x + 1] != '1'))
+		print_err_exit(WRONGDATA);
+}
+
 static void	check_map_invalid(char **map, t_obj *obj)
 {
 	int	x;
 	int	y;
 
-	y = 0;
-	if (obj->h < 3)
+	y = -1;
+	if (obj->h < 3 || obj->w < 3 || obj->p_cnt != 1)
 		print_err_exit(WRONGDATA);
-	if (obj->e_cnt + obj->n_cnt + obj->s_cnt + obj->w_cnt != 1)
-		print_err_exit(WRONGDATA);
-	while (y < obj->h)
+	while (++y < obj->h)
 	{
-		x = 0;
-		while (x < obj->w)
+		x = -1;
+		while (++x < obj->w)
 		{
 			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'E'
 			|| map[y][x] == 'W' || map[y][x] == 'S')
-			{
-				if (y == 0 || y == obj->h - 1 || x == 0 || x == obj->w - 1)
-					print_err_exit(NOWALL);
-				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
-				|| map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
-					print_err_exit(NOWALL);
-			}
+				check_object_map(map, obj, x, y);
 			if (map[y][x] == ' ')
 			{
 				if (y == 0 || y == obj->h - 1 || x == 0 || x == obj->w - 1)
@@ -31,15 +32,9 @@ static void	check_map_invalid(char **map, t_obj *obj)
 					++x;
 					continue ;
 				}
-				if ((map[y - 1][x] != ' ' && map[y - 1][x] != '1')
-					|| (map[y + 1][x] != ' ' && map[y + 1][x] != '1')
-					|| (map[y][x - 1] != ' ' && map[y][x - 1] != '1')
-					|| (map[y][x + 1] != ' ' && map[y][x + 1] != '1'))
-					print_err_exit(WRONGDATA);
+				check_space_map(map, x, y);
 			}
-			++x;
 		}
-		++y;
 	}
 }
 
@@ -75,11 +70,10 @@ static void	check_texture_data(t_game_info *info)
 static void	read_file(int fd, t_game_info *info, t_obj *obj)
 {
 	t_mapping	*m_head;
-	t_mapping	*tmp;
 	char		*line;
 	int			i;
 
-	i = 0;
+	i = -1;
 	m_head = NULL;
 	while (info->stop_flag != TRUE)
 	{
@@ -94,27 +88,7 @@ static void	read_file(int fd, t_game_info *info, t_obj *obj)
 		add_mapping_node(&m_head, new_mapping(line, obj, info));
 		line = get_next_line(fd);
 	}
-	tmp = m_head;
-	info->map_data->map = malloc(sizeof(char *) * obj->h);
-	while (i < obj->h)
-	{
-		info->map_data->map[i] = malloc(sizeof(char) * obj->w);
-		ft_strlcpy(info->map_data->map[i], tmp->line, tmp->line_len + 1);
-		while (obj->w > tmp->line_len)
-		{
-			info->map_data->map[i][tmp->line_len] = ' ';
-			++tmp->line_len;
-		}
-		tmp = tmp->next;
-		++i;
-	}
-	while (m_head != NULL)
-	{
-		free(m_head->line);
-		tmp = m_head->next;
-		free(m_head);
-		m_head = tmp;
-	}
+	read_map(info, obj, m_head, i);
 	check_map_invalid(info->map_data->map, obj);
 }
 

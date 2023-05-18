@@ -15,20 +15,10 @@ void	check_texture(char *line, t_game_info *info)
 	char	**tmp;
 	int		i;
 
-	i = 0;
+	i = -1;
 	tmp = ft_split(line, ' ');
-	if (!check_tmp_invalid(info, tmp))
-	{
-		if (tmp[0][0] == '\n')
-			free(line);
-		while (tmp[i] != NULL)
-		{
-			free(tmp[i]);
-			++i;
-		}
-		free(tmp);
+	if (!check_tmp_invalid(info, line, tmp))
 		return ;
-	}
 	tmp[1][ft_strlen(tmp[1]) - 1] = '\0';
 	if (!ft_strcmp(tmp[0], "NO"))
 		allocate_dir(tmp, info, NO);
@@ -44,11 +34,16 @@ void	check_texture(char *line, t_game_info *info)
 		allocate_ceil(tmp, info);
 	else
 		info->stop_flag = TRUE;
-	while (tmp[i] != NULL)
-	{
-		free(tmp[i]);
-		++i;
-	}
-	free(tmp);
-	free(line);
+	free_data(tmp);
+	if (info->stop_flag != TRUE)
+		free(line);
+}
+
+void	check_object_map(char **map, t_obj *obj, int x, int y)
+{
+	if (y == 0 || y == obj->h - 1 || x == 0 || x == obj->w - 1)
+		print_err_exit(NOWALL);
+	if (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
+	|| map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
+		print_err_exit(NOWALL);
 }

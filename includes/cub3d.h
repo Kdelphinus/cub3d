@@ -35,7 +35,6 @@ typedef enum e_errno {
 	WRONGDATA,
 	NOFILE,
 	WRONGFILE,
-	
 }	t_errno;
 
 typedef enum e_dir {
@@ -47,10 +46,7 @@ typedef enum e_dir {
 
 typedef struct s_obj
 {
-	int	n_cnt;
-	int	e_cnt;
-	int	s_cnt;
-	int	w_cnt;
+	int	p_cnt;
 	int	w;
 	int	h;
 }	t_obj;
@@ -143,7 +139,11 @@ void		ray_init(t_ray *ray);
 //check
 void		check_texture(char *line, t_game_info *info);
 void		check_extension(char *file_name);
-int			check_tmp_invalid(t_game_info *info, char **tmp);
+int			check_tmp_invalid(t_game_info *info, char *line, char **tmp);
+void		check_object_map(char **map, t_obj *obj, int x, int y);
+
+//read
+void		read_map(t_game_info *info, t_obj *obj, t_mapping *tmp, int i);
 
 //mapping allowcate
 void		allocate_dir(char **data, t_game_info *info, t_dir dir);
@@ -156,6 +156,7 @@ void		add_mapping_node(t_mapping **list, t_mapping *new_node);
 
 //utils
 void		print_err_exit(int errno);
+void		free_data(char **data);
 
 //raycast
 void		ray_cast(t_ray *ray, t_game_info *game_info);
@@ -170,7 +171,5 @@ void		put_color(int x, t_ray *ray, t_texture \
 void		key_rotate(int keycode, t_ray *ray);
 void		move_side(int keycode, t_ray *ray, char **map);
 void		key_move(int keycode, t_ray *ray, char **map);
-
-
 
 #endif

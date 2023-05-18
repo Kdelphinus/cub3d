@@ -1,14 +1,19 @@
 #include "../../includes/cub3d.h"
 
-int	check_tmp_invalid(t_game_info *info, char **tmp)
+int	check_tmp_invalid(t_game_info *info, char *line, char **tmp)
 {
 	if (tmp == NULL)
 		print_err_exit(WRONGDATA);
 	if (ft_strlen(tmp[0]) > 3 || tmp[1] == NULL || tmp[2] != NULL)
 	{
 		if (tmp[0][0] == '\n')
+		{
+			free_data(tmp);
+			free(line);
 			return (0);
+		}
 		info->stop_flag = TRUE;
+		free_data(tmp);
 		return (0);
 	}
 	return (1);
@@ -69,12 +74,7 @@ void	allocate_flr(char **data, t_game_info *info)
 		print_err_exit(WRONGDATA);
 	info->map_data->flr_color = simple_atoi(rgb[0]) << 16
 		| simple_atoi(rgb[1]) << 8 | simple_atoi(rgb[2]);
-	while (rgb[i] != NULL)
-	{
-		free(rgb[i]);
-		++i;
-	}
-	free(rgb);
+	free_data(rgb);
 }
 
 void	allocate_ceil(char **data, t_game_info *info)
@@ -91,10 +91,5 @@ void	allocate_ceil(char **data, t_game_info *info)
 		print_err_exit(WRONGDATA);
 	info->map_data->ceil_color = simple_atoi(rgb[0]) << 16
 		| simple_atoi(rgb[1]) << 8 | simple_atoi(rgb[2]);
-	while (rgb[i] != NULL)
-	{
-		free(rgb[i]);
-		++i;
-	}
-	free(rgb);
+	free_data(rgb);
 }
