@@ -29,14 +29,12 @@ int	simple_atoi(const char *str)
 		if (*str >= '0' && *str <= '9')
 		{
 			sum = (sum * 10) + (*str - '0');
+			if (sum > 255)
+				print_err_exit(WRONGDATA);
 			str++;
 		}
 		else if (*str == '\0')
-		{
-			if (sum > 255)
-				print_err_exit(WRONGDATA);
 			return (sum);
-		}
 		else
 			print_err_exit(WRONGDATA);
 	}
