@@ -1,23 +1,40 @@
 #include "../../includes/cub3d.h"
 
-
 static void	check_map_invalid(char **map, t_obj *obj)
 {
 	int	x;
 	int	y;
 
 	y = 0;
+	if (obj->h < 3)
+		print_err_exit(WRONGDATA);
+	if (obj->e_cnt + obj->n_cnt + obj->s_cnt + obj->w_cnt != 1)
+		print_err_exit(WRONGDATA);
 	while (y < obj->h)
 	{
 		x = 0;
 		while (x < obj->w)
 		{
-			if (map[y][x] == '0')
+			if (map[y][x] == '0' || map[y][x] == 'N' || map[y][x] == 'E'
+			|| map[y][x] == 'W' || map[y][x] == 'S')
 			{
 				if (y == 0 || y == obj->h - 1 || x == 0 || x == obj->w - 1)
-					print_err_exit(WRONGDATA);
+					print_err_exit(NOWALL);
 				if (map[y - 1][x] == ' ' || map[y + 1][x] == ' '
 				|| map[y][x - 1] == ' ' || map[y][x + 1] == ' ')
+					print_err_exit(NOWALL);
+			}
+			if (map[y][x] == ' ')
+			{
+				if (y == 0 || y == obj->h - 1 || x == 0 || x == obj->w - 1)
+				{
+					++x;
+					continue ;
+				}
+				if ((map[y - 1][x] != ' ' && map[y - 1][x] != '1')
+					|| (map[y + 1][x] != ' ' && map[y + 1][x] != '1')
+					|| (map[y][x - 1] != ' ' && map[y][x - 1] != '1')
+					|| (map[y][x + 1] != ' ' && map[y][x + 1] != '1'))
 					print_err_exit(WRONGDATA);
 			}
 			++x;
@@ -34,13 +51,13 @@ static void	check_texture_data(t_game_info *info)
 	i = 0;
 	if (info->map_data->ceil_count != 1 || info->map_data->flr_count != 1)
 		print_err_exit(WRONGDATA);
-    while (i < 4)
-    {
-        if (info->map_data->textures[i].path == NULL)
-            print_err_exit(WRONGDATA);
-        ++i;
-    }
-    i = 0;
+	while (i < 4)
+	{
+		if (info->map_data->textures[i].path == NULL)
+			print_err_exit(WRONGDATA);
+		++i;
+	}
+	i = 0;
 	while (i < 3)
 	{
 		j = i + 1;

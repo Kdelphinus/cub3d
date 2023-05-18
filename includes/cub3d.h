@@ -34,7 +34,8 @@ typedef enum e_errno {
 	NOWALL,
 	WRONGDATA,
 	NOFILE,
-
+	WRONGFILE,
+	
 }	t_errno;
 
 typedef enum e_dir {
