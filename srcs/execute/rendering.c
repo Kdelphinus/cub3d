@@ -63,7 +63,7 @@ void	put_color(int x, t_ray *ray, t_texture *texture, t_game_info *game_info)
 	j = ray->draw_start - 1;
 	while (++j < ray->draw_end)
 	{
-		ray->tex[Y] = (int)ray->tex_pos & (IMG_H - 1);
+		ray->tex[Y] = (int)ray->tex_pos;
 		ray->tex_pos += ray->step_d;
 		color = tex[ray->tex[Y] * IMG_W + ray->tex[X]];
 		game_info->img->data[j * SCREENWIDTH + x] = color;
