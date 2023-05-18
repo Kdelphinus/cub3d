@@ -62,6 +62,8 @@ t_mapping	*new_mapping(char *line, t_obj *obj, t_game_info *info)
 {
 	t_mapping	*ret;
 
+	if (*line == '\n')
+		print_err_exit(WRONGDATA);
 	ret = (t_mapping *)malloc(sizeof(t_mapping));
 	ret->line = line;
 	ret->line_len = check_obj(line, obj, info);
